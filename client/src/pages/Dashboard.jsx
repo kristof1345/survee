@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import axios from "axios";
+import SideNav from "../components/SideNav";
+import Surveys from "../components/Surveys";
 
 const Dashboard = ({ id, UID, setUID }) => {
   let prev;
@@ -25,7 +27,12 @@ const Dashboard = ({ id, UID, setUID }) => {
       .then((res) => console.log(res.data));
   };
 
-  return <div>Dashboard</div>;
+  return (
+    <div id="dashboard">
+      <SideNav UID={UID} />
+      <Surveys />
+    </div>
+  );
 };
 
 export default Dashboard;
