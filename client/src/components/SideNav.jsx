@@ -1,7 +1,10 @@
 import axios from "axios";
 import { nanoid } from "nanoid";
+import { useNavigate } from "react-router-dom";
 
 const SideNav = ({ UID }) => {
+  const navigate = useNavigate();
+
   const newSurvey = () => {
     const ID = nanoid(12);
     axios
@@ -9,7 +12,7 @@ const SideNav = ({ UID }) => {
         UID: UID,
         ID: ID,
       })
-      .then((res) => console.log(res.data));
+      .then((res) => navigate(`/survey/${res.data.SurveyID}`));
   };
 
   return (

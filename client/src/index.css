@@ -53,3 +53,37 @@ body {
 .survey-title {
   margin: 0;
 }
+
+#random-div {
+  height: 100%;
+}
+
+#editor {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#survey-content-holder {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#back-btn {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+}
+
+#survey-editor {
+  /* flex-basis: 100%; */
+  background-color: aqua;
+  min-width: 750px;
+  justify-self: center;
+}
+
+#editor-sidenav {
+  width: 550px;
+  background-color: rgb(239, 239, 239);
+}

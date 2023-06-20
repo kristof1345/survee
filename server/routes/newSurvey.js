@@ -11,6 +11,7 @@ router.post("/new", async (req, res) => {
     let survey = new Survey({
       UID: UID,
       SurveyID: ID,
+      Title: "New Survee",
       SurveyContent: [],
       SurveyResults: [],
     });
@@ -23,6 +24,23 @@ router.post("/new", async (req, res) => {
     await user.save();
 
     res.json(survey);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json("Server error");
+  }
+});
+
+router.post("/get", async (req, res) => {
+  const { UID, ID } = req.body;
+
+  try {
+    let survey = await Survey.findOne({ SurveyID: ID });
+
+    if (survey) {
+      res.json(survey);
+    } else {
+      res.json("Wasn't able to find survey");
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json("Server error");
