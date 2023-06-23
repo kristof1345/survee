@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Interpret from "../components/Interpret";
 
 const Editor = ({ UID }) => {
   const [survey, setSurvey] = useState();
   let { id } = useParams();
-  console.log(id);
+  console.log(survey);
 
   useEffect(() => {
     getSurvey();
@@ -22,16 +23,47 @@ const Editor = ({ UID }) => {
   };
 
   const saveSurvey = () => {
+    let finalContent = [];
     const title = document.getElementById("st-content");
-    console.log(title.textContent);
+    const content = document.getElementById("survey-content");
+
+    const forms = content.getElementsByClassName("survey-form");
+
+    [...forms].map((form, i) => {
+      let obj = {};
+
+      obj.type = form.dataset.type;
+      obj.question = form.querySelector(".form-title").value;
+
+      finalContent.push(obj);
+    });
 
     axios
       .patch("http://localhost:3000/survey/update", {
         ID: id,
         Title: title.textContent,
-        Content: [],
+        Content: finalContent,
       })
       .then((res) => console.log(res.data));
+  };
+
+  const addFillIn = () => {
+    const content = document.getElementById("survey-content");
+
+    let form = document.createElement("div");
+    form.classList.add("survey-form");
+    form.dataset.type = "fillin";
+
+    let question = document.createElement("textarea");
+    question.classList.add("form-title");
+    question.placeholder = "Ask a question...";
+    form.append(question);
+
+    let answer = document.createElement("textarea");
+    answer.classList.add("form-answer");
+    form.append(answer);
+
+    content.append(form);
   };
 
   return (
@@ -53,16 +85,19 @@ const Editor = ({ UID }) => {
               {survey?.Title ? <h1 id="st-content">{survey.Title}</h1> : null}
             </div>
             <div id="survey-content">
-              {survey?.SurveyContent.length > 0 ? (
-                <></>
-              ) : (
-                <div>Create your surveys content here</div>
-              )}
+              {survey?.SurveyContent.length > 0
+                ? survey.SurveyContent.map((form, i) => (
+                    <Interpret form={form} key={i} />
+                  ))
+                : null}
             </div>
           </div>
         </div>
         <div id="editor-sidenav">
           <button onClick={() => saveSurvey()}>Save</button>
+          <div className="editor-components">
+            <button onClick={() => addFillIn()}>Add Fill In</button>
+          </div>
         </div>
       </div>
     </div>

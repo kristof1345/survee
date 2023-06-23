@@ -90,3 +90,35 @@ body {
   width: 550px;
   background-color: rgb(239, 239, 239);
 }
+
+.survey-form {
+  background-color: rgb(185, 185, 185);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.form-title {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  resize: none;
+  overflow: auto;
+  min-height: 80px;
+}
+.form-title:focus {
+  outline: none;
+}
+.form-answer {
+  background-color: rgb(207, 207, 207);
+  border: none;
+  font-size: 1rem;
+  resize: none;
+  overflow: auto;
+  min-height: 40px;
+}
+.form-answer:focus {
+  outline: none;
+}
