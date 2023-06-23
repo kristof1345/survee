@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import axios from "axios";
+import Render from "./pages/Render";
 import Dashboard from "../src/pages/Dashboard";
 import Editor from "../src/pages/Editor";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -39,6 +39,7 @@ function App() {
           element={<Dashboard id={id} UID={UID} setUID={setUID} />}
         />
         <Route path="/survey/:id" element={<Editor UID={UID} />} />
+        <Route path="/:id" element={<Render />} />
       </Routes>
     </BrowserRouter>
   );

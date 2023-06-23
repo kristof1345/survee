@@ -31,7 +31,7 @@ router.post("/new", async (req, res) => {
 });
 
 router.post("/get", async (req, res) => {
-  const { UID, ID } = req.body;
+  const { ID } = req.body;
 
   try {
     let survey = await Survey.findOne({ SurveyID: ID });

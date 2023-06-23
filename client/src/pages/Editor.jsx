@@ -87,7 +87,7 @@ const Editor = ({ UID }) => {
             <div id="survey-content">
               {survey?.SurveyContent.length > 0
                 ? survey.SurveyContent.map((form, i) => (
-                    <Interpret form={form} key={i} />
+                    <Interpret form={form} key={i} way={"editable"} />
                   ))
                 : null}
             </div>

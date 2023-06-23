@@ -1,10 +1,17 @@
 import React from "react";
 
-const Interpret = ({ form }) => {
+const Interpret = ({ form, way }) => {
   console.log(form);
   return (
     <div className="survey-form" data-type={form.type}>
-      <textarea className="form-title" defaultValue={form.question}></textarea>
+      {way === "editable" ? (
+        <textarea
+          className="form-title"
+          defaultValue={form.question}
+        ></textarea>
+      ) : (
+        <div className="form-title">{form.question}</div>
+      )}
       {form.type === "fillin" && (
         <textarea
           className="form-answer"

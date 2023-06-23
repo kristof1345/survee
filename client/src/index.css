@@ -106,7 +106,7 @@ body {
   font-size: 2rem;
   resize: none;
   overflow: auto;
-  min-height: 80px;
+  min-height: 60px;
 }
 .form-title:focus {
   outline: none;
@@ -121,4 +121,24 @@ body {
 }
 .form-answer:focus {
   outline: none;
+}
+
+.client-main {
+  height: inherit;
+}
+
+.client-survey {
+  width: 750px;
+  margin: auto;
+  background-color: aliceblue;
+  padding: 30px 0;
+}
+
+.cs-title {
+  font-size: 2.7rem;
+  margin: 0;
+}
+
+.cs-content {
+  margin-top: 40px;
 }
