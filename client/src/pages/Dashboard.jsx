@@ -30,7 +30,7 @@ const Dashboard = ({ id, UID, setUID }) => {
   return (
     <div id="dashboard">
       <SideNav UID={UID} />
-      <Surveys />
+      <Surveys UID={UID} />
     </div>
   );
 };

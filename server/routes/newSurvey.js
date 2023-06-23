@@ -47,4 +47,43 @@ router.post("/get", async (req, res) => {
   }
 });
 
+router.post("/all", async (req, res) => {
+  const { UID } = req.body;
+
+  try {
+    let user = await User.findOne({ UID });
+
+    const ids = [...user.Surveys];
+
+    const records = await Survey.find().where("SurveyID").in(ids).exec();
+
+    if (records) {
+      res.json(records);
+    } else {
+      res.json("Wasn't able to find surveys");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json("Server error");
+  }
+});
+
+router.patch("/update", async (req, res) => {
+  const { ID, Title, Content } = req.body;
+
+  try {
+    let survey = await Survey.findOne({ SurveyID: ID });
+
+    survey.Title = Title;
+    survey.SurveyContent = Content;
+
+    await survey.save();
+
+    res.json("Success");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json("Server error");
+  }
+});
+
 export default router;

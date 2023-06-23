@@ -21,6 +21,19 @@ const Editor = ({ UID }) => {
       .then((res) => setSurvey(res.data));
   };
 
+  const saveSurvey = () => {
+    const title = document.getElementById("st-content");
+    console.log(title.textContent);
+
+    axios
+      .patch("http://localhost:3000/survey/update", {
+        ID: id,
+        Title: title.textContent,
+        Content: [],
+      })
+      .then((res) => console.log(res.data));
+  };
+
   return (
     <div id="random-div">
       {survey === "Wasn't able to find survey" && (
@@ -32,8 +45,12 @@ const Editor = ({ UID }) => {
         </Link>
         <div id="survey-content-holder">
           <div id="survey-editor">
-            <div id="survey-title">
-              {survey?.Title ? <h1>{survey.Title}</h1> : null}
+            <div
+              id="survey-title"
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+            >
+              {survey?.Title ? <h1 id="st-content">{survey.Title}</h1> : null}
             </div>
             <div id="survey-content">
               {survey?.SurveyContent.length > 0 ? (
@@ -45,7 +62,7 @@ const Editor = ({ UID }) => {
           </div>
         </div>
         <div id="editor-sidenav">
-          <button>Save</button>
+          <button onClick={() => saveSurvey()}>Save</button>
         </div>
       </div>
     </div>
