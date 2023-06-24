@@ -7,7 +7,6 @@ import Interpret from "../components/Interpret";
 const Render = () => {
   const [survey, setSurvey] = useState();
   let { id } = useParams();
-  console.log(survey);
 
   useEffect(() => {
     getSurvey();
@@ -21,6 +20,35 @@ const Render = () => {
       .then((res) => setSurvey(res.data));
   };
 
+  const submitSurvey = () => {
+    let results = [];
+    let forms = document.getElementsByClassName("survey-form");
+
+    [...forms].map((form, i) => {
+      let obj = {};
+      const question = form.querySelector(".form-title").textContent;
+
+      obj.question = question;
+
+      if (form.dataset.type === "fillin") {
+        const answer = form.querySelector(".form-answer").value;
+
+        obj.answer = answer;
+      }
+
+      obj.type = form.dataset.type;
+
+      results.push(obj);
+    });
+
+    axios
+      .patch("http://localhost:3000/survey/submit", {
+        ID: id,
+        Results: results,
+      })
+      .then((res) => console.log(res.data));
+  };
+
   return (
     <div className="client-main">
       <div className="client-survey">
@@ -32,7 +60,7 @@ const Render = () => {
               ))
             : null}
         </div>
-        <button>Submit</button>
+        <button onClick={() => submitSurvey()}>Submit</button>
       </div>
     </div>
   );

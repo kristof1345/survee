@@ -86,4 +86,21 @@ router.patch("/update", async (req, res) => {
   }
 });
 
+router.patch("/submit", async (req, res) => {
+  const { ID, Results } = req.body;
+
+  try {
+    let survey = await Survey.findOne({ SurveyID: ID });
+
+    survey.SurveyResults.push(Results);
+
+    await survey.save();
+
+    res.json("Success");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json("Server error");
+  }
+});
+
 export default router;

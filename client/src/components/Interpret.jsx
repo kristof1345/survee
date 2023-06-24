@@ -1,7 +1,6 @@
 import React from "react";
 
 const Interpret = ({ form, way }) => {
-  console.log(form);
   return (
     <div className="survey-form" data-type={form.type}>
       {way === "editable" ? (
