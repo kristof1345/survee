@@ -45,6 +45,9 @@ body {
 
 .survey {
   display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   text-decoration: none;
   color: black;
   background-color: rgb(240, 240, 240);
@@ -141,4 +144,14 @@ body {
 
 .cs-content {
   margin-top: 40px;
+}
+
+.copy-btn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  text-decoration: underline;
+  color: blue;
+  z-index: 100;
 }
