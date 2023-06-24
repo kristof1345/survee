@@ -31,7 +31,7 @@ const Render = () => {
       obj.question = question;
 
       if (form.dataset.type === "fillin") {
-        const answer = form.querySelector(".form-answer").value;
+        const answer = form.querySelector(".form-answer").innerHTML;
 
         obj.answer = answer;
       }
@@ -60,7 +60,9 @@ const Render = () => {
               ))
             : null}
         </div>
-        <button onClick={() => submitSurvey()}>Submit</button>
+        <button className="submit-survey" onClick={() => submitSurvey()}>
+          Submit
+        </button>
       </div>
     </div>
   );

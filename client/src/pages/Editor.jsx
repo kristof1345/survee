@@ -33,7 +33,7 @@ const Editor = ({ UID }) => {
       let obj = {};
 
       obj.type = form.dataset.type;
-      obj.question = form.querySelector(".form-title").value;
+      obj.question = form.querySelector(".form-title").innerHTML;
 
       finalContent.push(obj);
     });
@@ -54,12 +54,12 @@ const Editor = ({ UID }) => {
     form.classList.add("survey-form");
     form.dataset.type = "fillin";
 
-    let question = document.createElement("textarea");
+    let question = document.createElement("span");
     question.classList.add("form-title");
-    question.placeholder = "Ask a question...";
+    question.contentEditable = true;
     form.append(question);
 
-    let answer = document.createElement("textarea");
+    let answer = document.createElement("span");
     answer.classList.add("form-answer");
     form.append(answer);
 
@@ -94,9 +94,13 @@ const Editor = ({ UID }) => {
           </div>
         </div>
         <div id="editor-sidenav">
-          <button onClick={() => saveSurvey()}>Save</button>
+          <button className="save-survey" onClick={() => saveSurvey()}>
+            Save
+          </button>
           <div className="editor-components">
-            <button onClick={() => addFillIn()}>Add Fill In</button>
+            <button className="comp-btn" onClick={() => addFillIn()}>
+              Add Fill In
+            </button>
           </div>
         </div>
       </div>
